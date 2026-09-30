@@ -14,7 +14,7 @@ const PRIVATE_APP_ACCESS = '';
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const deals = 'https://api.hubapi.com/crm/v3/objects/deals';
+    const deals = 'const deals = 'https://api.hubapi.com/crm/v3/objects/deals?properties=name,bio,age';';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(deals, { headers });
         const data = resp.data.results;
 
-        res.render('deals', {
+        res.render('homepage', {
             title: 'Deals | HubSpot APIs',
             data
         });
@@ -37,12 +37,37 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', (req, res) => {
-    res.render('updates');
+    res.render('updates', {
+        title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+    });
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+app.post('/update-cobj', async (req, res) => {
+    const newDeal = {
+        properties: {
+            dealname: req.body.name,
+            amount: req.body.bio,
+            dealstage: req.body.age
+        }
+    };
+
+    const deals = 'https://api.hubapi.com/crm/v3/objects/deals';
+
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try {
+        await axios.post(deals, newDeal, { headers });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

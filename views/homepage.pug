@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+    body
+        a(href="/update-cobj") Add to this table
+
+        h1 Deals
+
+        table
+            thead
+                tr
+                    th Name
+                    th Bio
+                    th Age
+            tbody
+                each deal in data
+                    tr
+                        td= deal.properties.name
+                        td= deal.properties.bio
+                        td= deal.properties.age
