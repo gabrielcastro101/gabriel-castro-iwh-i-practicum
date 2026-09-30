@@ -14,7 +14,7 @@ const PRIVATE_APP_ACCESS = '';
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const deals = 'const deals = 'https://api.hubapi.com/crm/v3/objects/deals?properties=name,bio,age';';
+    const deals = 'https://api.hubapi.com/crm/v3/objects/deals?properties=name,bio,age';';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
